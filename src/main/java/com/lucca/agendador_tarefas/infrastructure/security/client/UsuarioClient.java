@@ -1,4 +1,4 @@
-package com.lucca.agendador_tarefas.infrastructure.client;
+package com.lucca.agendador_tarefas.infrastructure.security.client;
 
 import com.lucca.agendador_tarefas.business.dto.UsuarioDTO;
 import org.springframework.cloud.openfeign.FeignClient;
