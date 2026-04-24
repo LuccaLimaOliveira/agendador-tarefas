@@ -2,6 +2,7 @@ package com.lucca.agendador_tarefas.controller;
 
 import com.lucca.agendador_tarefas.business.TarefasService;
 import com.lucca.agendador_tarefas.business.dto.TarefasDTO;
+import com.lucca.agendador_tarefas.infrastructure.enums.StatusNotificacaoEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,25 @@ public class TarefasController {
     public ResponseEntity<List<TarefasDTO>> buscarTarefasPorEmail(@RequestHeader("Authorization") String token){
         List<TarefasDTO> tarefas = tarefasService.buscarTarefaPorEmail(token);
         return ResponseEntity.ok(tarefas);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deletarTarefaPorId(@RequestParam("id") String id){
+        tarefasService.deletarTarefaPorId(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<TarefasDTO> alteraStatusTarefa(@RequestParam("status")StatusNotificacaoEnum status,
+                                                         @RequestParam("id") String id){
+        return ResponseEntity.ok(tarefasService.alteraStatusTarefa(status, id));
+    }
+
+    @PutMapping
+    public ResponseEntity<TarefasDTO> updateTarefas(@RequestBody TarefasDTO dto,
+                                                    @RequestParam("id") String id){
+        return ResponseEntity.ok(tarefasService.updateTarefas(dto,id));
     }
 
 }
